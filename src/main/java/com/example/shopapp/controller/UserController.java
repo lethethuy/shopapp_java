@@ -1,6 +1,7 @@
 package com.example.shopapp.controller;
 
 import com.example.shopapp.DTO.*;
+import com.example.shopapp.models.User;
 import com.example.shopapp.service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +35,9 @@ public class UserController {
             if (!userDTO.getPassword().equals(userDTO.getRetypePassword())){
                 return ResponseEntity.badRequest().body("Password does not match");
             }
-            userService.createUser(userDTO);
-            return ResponseEntity.ok("Register successfully");
+            User user = userService.createUser(userDTO);
+//            return ResponseEntity.ok("Register successfully");
+            return ResponseEntity.ok(user);
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

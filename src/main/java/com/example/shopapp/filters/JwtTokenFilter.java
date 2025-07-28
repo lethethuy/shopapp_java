@@ -35,9 +35,6 @@ public class JwtTokenFilter extends OncePerRequestFilter{
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            if (CorsUtils.isPreFlightRequest(request)){
-                response.setStatus(HttpServletResponse.SC_OK);
-            }
             if(isBypassToken(request)) {
                 filterChain.doFilter(request, response); //enable bypass
                 return;
